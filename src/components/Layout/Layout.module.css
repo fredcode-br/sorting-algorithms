@@ -1,0 +1,10 @@
+.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-columns: 300px auto;
+    grid-template-areas:
+    'AS MH'
+    'AS CT';
+
+    height: 100vh;
+}
