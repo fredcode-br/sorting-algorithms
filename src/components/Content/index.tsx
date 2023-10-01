@@ -1,16 +1,27 @@
+import { useState, useEffect } from "react";
 import Footer from "../Footer";
 import Number from "../Number";
 
 const Content = () => {
+    const [numbers, setNumbers] = useState<Array<number>>([])
+    const randomNumbers: number[] = [];
+    for (let i = 0; i < 10; i++) {
+        const randomNumber: number = Math.floor(Math.random() * 99) + 1;
+        randomNumbers.push(randomNumber)
+    }
+
+    useEffect(() => {
+        setNumbers(randomNumbers)
+        }, [])
+
     return (
         <div className="flex flex-col justify-center items-center relative gap-2 bg-dark-100  dark:bg-ligth-100  text-white dark:text-black" style={{ gridArea: 'CT', height: '88vh'}}>
             <ul className="flex gap-2">
-                <Number />
-                <Number />
-                <Number />
-                <Number />
-                <Number />
-                <Number />
+                {numbers.map((number, index) => (
+                    <Number key={index}>{number}</Number>
+                ))}
+                
+            
             </ul>
             <div className="flex pt-10">
                 <label 
