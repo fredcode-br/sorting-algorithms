@@ -2,22 +2,14 @@ import { useState } from "react";
 import Button from "../Button";
 import Select from "../Select";
 
+import { useAlgorithmContext } from "../../common/context/Algorithm";
 
 const Form = () => {
-    const algorithms: { name: string; value: string }[] = [
-        {name: 'Bubble Sort', value: 'bubble'},
-        {name: 'Selection Sort', value: 'selection'},
-        {name: 'Insertion Sort', value: 'insertion'}
-    ]
+
+    const { algorithms, selectAlgorithmn, sort, reset } = useAlgorithmContext();
 
     const [speed, setSpeed] = useState<string>('5')
-
-    function submit() {
-      
-        "teste"
-      
-    }
-
+    
     return (
         <div className="w-full">
             <h2 className="pb-10 font-bold text-3xl">Algorithms</h2>
@@ -30,12 +22,13 @@ const Form = () => {
                 </label>
                 <Select 
                     id="algorithm" 
-                    options={algorithms} 
+                    options={algorithms}
+                    handleSelect={(value = "") => selectAlgorithmn(value)}
                 />
                 </div>
                 <div className="w-full">
                     <input 
-                            className="w-full bg-fredcode-300"
+                            className="w-full"
                             type="range" 
                             name="speed" 
                             id="speed"
@@ -56,14 +49,18 @@ const Form = () => {
                     </div>
                 </div>
                 <div className="w-full">
-                    <Button type="submit" customClass="w-full">
+                    <Button type="submit" customClass="w-full" handleClick={() => sort()}>
                         Ordenar
                     </Button>
                     <div className="flex justify-between pt-4">
-                        <Button>
+                        <Button
+                            handleClick={() => {reset()}}
+                        >
                             Resetar
                         </Button>
-                        <Button>
+                        <Button 
+                            handleClick={() => {}}
+                        >
                             Parar
                         </Button>
                     </div> 

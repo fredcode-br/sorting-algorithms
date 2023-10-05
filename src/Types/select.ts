@@ -1,5 +1,5 @@
 export default interface Iselect {
     options: { name: string; value: string }[]
     id: string,
-    onChange?: void
+    handleSelect: (algorithm?: string) => void
 }

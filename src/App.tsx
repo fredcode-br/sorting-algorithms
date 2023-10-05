@@ -1,9 +1,12 @@
+import { AlgorithmProvider } from './common/context/Algorithm';
 import Layout from './components/Layout';
 
 function App() {
   return (
     <div className="App">
-      <Layout />
+      <AlgorithmProvider>
+        <Layout />
+      </AlgorithmProvider>
     </div>
   );
 }
