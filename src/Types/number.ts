@@ -1,3 +1,4 @@
 export default interface Inumber {
-    children: React.ReactNode
+    children: React.ReactNode,
+    id: string
 }

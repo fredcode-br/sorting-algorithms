@@ -6,7 +6,7 @@ import { useAlgorithmContext } from "../../common/context/Algorithm";
 
 const Form = () => {
 
-    const { algorithms, selectAlgorithmn, sort, reset } = useAlgorithmContext();
+    const { algorithms, selectAlgorithmn, sort, reset, stop } = useAlgorithmContext();
 
     const [speed, setSpeed] = useState<string>('5')
     
@@ -59,7 +59,7 @@ const Form = () => {
                             Resetar
                         </Button>
                         <Button 
-                            handleClick={() => {}}
+                            handleClick={() => {stop()}}
                         >
                             Parar
                         </Button>

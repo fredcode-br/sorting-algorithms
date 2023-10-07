@@ -1,6 +1,5 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { AlgorithmContextType, IAlgorithmContext } from '../../Types/algorithm';
-// import { bubble } from '../../algorithms/index';
 
 type Props = {
     children?: ReactNode;
@@ -18,16 +17,23 @@ const DEFAUL_VALUE = {
     setActualAlgorithm: () => {},
     numbers: [],
     setNumbers: () => {},
+    sorting: false,
+    setSorting: () => {},
+    activeNumbers: [],
+    setActiveNumbers: () => {},
     steps: 0,
-    setSteps: () => {}
+    setSteps: () => {},
+    speed: 1,
+    setSpeed: () => {}
 };
 
-
-function generateRandomnumbers() {
+function generateRandomNumbers(): number[] {
     const randomNumbers: number[] = [];
-    for (let i = 0; i < 10; i++) {
+    while (randomNumbers.length < 10) {
         const randomNumber: number = Math.floor(Math.random() * 99) + 1;
-        randomNumbers.push(randomNumber)
+        if (!randomNumbers.includes(randomNumber)) {
+            randomNumbers.push(randomNumber);
+        }
     }
     return randomNumbers;
 }
@@ -43,8 +49,11 @@ export const AlgorithmProvider = ({ children }: Props) => {
         {name: 'Quick Sort', value: 'quick'}
     ];
     const [ actualAlgorithm, setActualAlgorithm ] = useState<IAlgorithmContext>(algorithms[0]);
-    const [ numbers, setNumbers ] = useState<number[]>(generateRandomnumbers);
+    const [ numbers, setNumbers ] = useState<number[]>(generateRandomNumbers);
+    const [ sorting, setSorting ] = useState<boolean>(false);
+    const [ activeNumbers, setActiveNumbers ] = useState<number[]>([]);
     const [ steps, setSteps ] = useState<number>(0);
+    const [ speed, setSpeed ] = useState<number>(1)
     
     return (
         <AlgorithmContext.Provider value={{ 
@@ -53,8 +62,14 @@ export const AlgorithmProvider = ({ children }: Props) => {
             setActualAlgorithm,
             numbers,
             setNumbers,
+            sorting,
+            setSorting,
+            activeNumbers, 
+            setActiveNumbers,
             steps,
-            setSteps
+            setSteps,
+            speed,
+            setSpeed
         }}>
             { children }
         </AlgorithmContext.Provider>
@@ -68,26 +83,25 @@ export const useAlgorithmContext = () => {
         setActualAlgorithm, 
         numbers,
         setNumbers,
+        sorting,
+        setSorting,
+        activeNumbers, 
+        setActiveNumbers,
         steps,
-        setSteps
+        setSteps,
+        speed,
+        setSpeed
     } = useContext(AlgorithmContext);
-
+    
     function selectAlgorithmn(value: string) {
         const algorithm: IAlgorithmContext = algorithms.find(algorithm => algorithm.value === value ) || {name: "", value: ""};
         setActualAlgorithm(algorithm)
     }
-    
-    function sort() {
-        const copiedNumbers = [...numbers];
-        const sortedNumbers = bubble(copiedNumbers)
-        setNumbers(sortedNumbers)
-       
-       
-    }
 
     function bubble(arr: number[]) {
-        for (var i = 0; i < arr.length; i++) { 
+        for (var i = 0; i < arr.length; i++) {                 
             for (var j = 0; j < (arr.length - i - 1); j++) { 
+                setActiveNumbers([numbers[0], numbers[1]])
                 if (arr[j] > arr[j + 1]) { 
                     var temp = arr[j] 
                     arr[j] = arr[j + 1] 
@@ -98,14 +112,38 @@ export const useAlgorithmContext = () => {
         }
         return arr
     }
+    
+    function sort() {
+        setSorting(true)
+
+        // const copiedNumbers = [...numbers]; 
+        // const sortedNumbers = bubble(copiedNumbers)
+        // setSorting(false)
+        // setNumbers(sortedNumbers)
+    }
 
     function reset() {
-        setNumbers(generateRandomnumbers)
+        setSorting(false)
+        setNumbers(generateRandomNumbers)
         setSteps(0)
     }
 
+    function stop() {
+        setSorting(false)
+    }
+
     useEffect(() => {
-        setNumbers(generateRandomnumbers)
+        if(!sorting){
+            // document.getElementById('play-btn').disabled = false;
+            // document.getElementById('play-btn').style.backgroundColor = 'rgb(0, 149, 199)';
+            // document.getElementById('change-btn').disabled = false;
+            // document.getElementById('change-btn').style.backgroundColor = 'rgb(0, 149, 199)';
+         }
+
+    }, [sorting])
+
+    useEffect(() => {
+        setNumbers(generateRandomNumbers)
         setSteps(0)
       }, [actualAlgorithm, setNumbers, setSteps])
 
@@ -114,10 +152,15 @@ export const useAlgorithmContext = () => {
         algorithms,
         actualAlgorithm,
         numbers,
+        setNumbers,
         selectAlgorithmn,
         sort,
         steps,
         setSteps,
-        reset
+        reset,
+        stop,
+        speed, 
+        sorting,
+        setSorting
     }
 }
