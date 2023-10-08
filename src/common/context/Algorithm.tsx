@@ -23,7 +23,7 @@ const DEFAUL_VALUE = {
     setActiveNumbers: () => {},
     steps: 0,
     setSteps: () => {},
-    speed: 1,
+    speed: 3000,
     setSpeed: () => {}
 };
 
@@ -53,7 +53,7 @@ export const AlgorithmProvider = ({ children }: Props) => {
     const [ sorting, setSorting ] = useState<boolean>(false);
     const [ activeNumbers, setActiveNumbers ] = useState<number[]>([]);
     const [ steps, setSteps ] = useState<number>(0);
-    const [ speed, setSpeed ] = useState<number>(1)
+    const [ speed, setSpeed ] = useState<number>(3000)
     
     return (
         <AlgorithmContext.Provider value={{ 
@@ -160,6 +160,7 @@ export const useAlgorithmContext = () => {
         reset,
         stop,
         speed, 
+        setSpeed,
         sorting,
         setSorting
     }

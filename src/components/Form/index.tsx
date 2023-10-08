@@ -6,9 +6,7 @@ import { useAlgorithmContext } from "../../common/context/Algorithm";
 
 const Form = () => {
 
-    const { algorithms, selectAlgorithmn, sort, reset, stop } = useAlgorithmContext();
-
-    const [speed, setSpeed] = useState<string>('5')
+    const { algorithms, selectAlgorithmn, sort, reset, stop, speed, setSpeed} = useAlgorithmContext();
     
     return (
         <div className="w-full">
@@ -32,10 +30,10 @@ const Form = () => {
                             type="range" 
                             name="speed" 
                             id="speed"
-                            step="1"
-                            min="1"
-                            max="5"
-                            onChange={event => setSpeed(event.target.value)}
+                            step="1000"
+                            min="1000"
+                            max="5000"
+                            onChange={event => setSpeed(Number(event.target.value))}
                             />
                     <div className="flex w-full pt-3">
                         <label 
@@ -44,7 +42,7 @@ const Form = () => {
                             Velocidade
                         </label>
                         <p className="w-full bg-dark-300 dark:bg-fredcode-100  text-white border border-gray-100 px-3 py-2 rounded-r">
-                            {speed}
+                            {(Number(speed))*0.001}
                         </p>
                     </div>
                 </div>
