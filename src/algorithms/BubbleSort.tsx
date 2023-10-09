@@ -26,7 +26,7 @@ const BubbleSort = () => {
                         setTimeout(() => {
                             if (numberJ) numberJ.style.border='none'
                             if (numberJ1) numberJ1.style.border='none'
-                            if (j == i-1) if (numberJ1) numberJ1.style.border="solid 3px green"
+                            if (j === i-1) if (numberJ1) numberJ1.style.border="solid 3px green"
                         }, speed-100)
                         
                         if (sortedNumbers[j] < sortedNumbers[j - 1]) {
@@ -44,7 +44,7 @@ const BubbleSort = () => {
                             setTimeout(() => {
                                 setNumbers(sortedNumbers)
                                 setSteps(steps => steps+1)
-                            }, speed*0.22)
+                            }, speed*0.52)
                         
                             setTimeout(()=>{
                                 if (numberJ) numberJ.style.transform='translateY(0%)'
@@ -61,13 +61,12 @@ const BubbleSort = () => {
 
     useEffect(() => {
         if(actualAlgorithm.value === 'bubble'){
-            if(sorting == true)
+            if(sorting === true)
                solve();
          }
-    }, [sorting]);
+    }, [sorting, actualAlgorithm.value]);
    
     return <></>;
-
 }
 
 export default BubbleSort

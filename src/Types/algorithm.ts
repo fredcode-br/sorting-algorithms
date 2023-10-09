@@ -11,8 +11,6 @@ export type AlgorithmContextType = {
     setNumbers: React.Dispatch<React.SetStateAction<number[]>>;
     sorting: boolean;
     setSorting: React.Dispatch<React.SetStateAction<boolean>>;
-    activeNumbers: number[];
-    setActiveNumbers: React.Dispatch<React.SetStateAction<number[]>>;
     steps: number;
     setSteps: React.Dispatch<React.SetStateAction<number>>;
     speed: number;
