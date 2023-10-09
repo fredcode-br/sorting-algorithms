@@ -13,7 +13,7 @@ const BubbleSort = () => {
     } = useAlgorithmContext();
     let sortedNumbers = [...numbers];
 
-    const solve = () => {
+    function solve() {
         for(let i = sortedNumbers.length, timer=0; i > 0; timer += i-1, i--){
             setTimeout(() => {
                 for(let j = 1; j < i; j++){
@@ -24,10 +24,12 @@ const BubbleSort = () => {
                         if (numberJ1) numberJ1.style.border="solid 3px red"
 
                         setTimeout(() => {
-                            if (numberJ) numberJ.style.border='none'
-                            if (numberJ1) numberJ1.style.border='none'
-                            if (j === i-1) if (numberJ1) numberJ1.style.border="solid 3px green"
-                        }, speed-100)
+                            if (numberJ) numberJ.style.border='solid 1px #6b7280'
+                            if (numberJ1) numberJ1.style.border='solid 1px #6b7280'
+                            if (j === i-1) {
+                                if (numberJ1) numberJ1.style.border="solid 3px green"
+                            }
+                        }, speed*0.63)
                         
                         if (sortedNumbers[j] < sortedNumbers[j - 1]) {
                             let temp = sortedNumbers[j];
@@ -54,15 +56,21 @@ const BubbleSort = () => {
     
                     }, (j-1)*speed)
                 }
-            },timer*speed)
+                if (i === 1) { 
+                        for(i = 0; i < sortedNumbers.length; i++) {
+                            let number = document.getElementById(`${sortedNumbers[i]}`)
+                            if (number) number.style.border="solid 3px green"
+                            setSorting(false    )
+                        }
+                }
+            },timer*speed*1.1)
         }   
-       setSorting(false)
     }
 
     useEffect(() => {
         if(actualAlgorithm.value === 'bubble'){
             if(sorting === true)
-               solve();
+                solve();
          }
     }, [sorting, actualAlgorithm.value]);
    

@@ -41,8 +41,8 @@ AlgorithmContext.displayName = "Algorítmo";
 
 export const AlgorithmProvider = ({ children }: Props) => {
     const algorithms: IAlgorithmContext[] = [
-        {name: 'Selection Sort', value: 'selection'},
         {name: 'Bubble Sort', value: 'bubble'},
+        {name: 'Selection Sort', value: 'selection'},
         {name: 'Insertion Sort', value: 'insertion'},
         {name: 'Quick Sort', value: 'quick'}
     ];
@@ -93,11 +93,6 @@ export const useAlgorithmContext = () => {
 
     function sort() {
         setSorting(true)
-
-        // const copiedNumbers = [...numbers]; 
-        // const sortedNumbers = bubble(copiedNumbers)
-        // setSorting(false)
-        // setNumbers(sortedNumbers)
     }
 
     function reset() {

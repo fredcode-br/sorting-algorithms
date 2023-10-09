@@ -60,9 +60,14 @@ const SelectionSort = () => {
     }
 
     useEffect(() => {
+        let smallerDiv = document.getElementById('smaller-div')
         if(actualAlgorithm.value === 'selection'){
+            if(smallerDiv) smallerDiv?.classList.replace('hidden', 'flex');
             if(sorting === true)
                solve();
+         }
+         else {
+            if(smallerDiv) smallerDiv?.classList.replace('flex', 'hidden');
          }
     }, [sorting, actualAlgorithm.value]);
    

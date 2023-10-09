@@ -1,6 +1,6 @@
 import Button from "../Button";
 import Select from "../Select";
-
+import IconReset from "./reset.svg"
 import { useAlgorithmContext } from "../../common/context/Algorithm";
 
 const Form = () => {
@@ -25,6 +25,7 @@ const Form = () => {
                 </div>
                 <div className="w-full">
                     <input 
+                            disabled={sorting}
                             className="w-full"
                             type="range" 
                             name="speed" 
@@ -45,23 +46,26 @@ const Form = () => {
                         </p>
                     </div>
                 </div>
-                <div className="w-full">
-                    <Button type="submit" customClass="w-full" id="sort" handleClick={() => sort()}>
+                <div className="flex gap-2 w-full">
+                    <Button
+                        handleClick={() => {reset()}}
+                        status={sorting}
+                    >
+                        <img
+                            className=" text-ligth-100 w-8"
+                            src={IconReset} 
+                            alt="Resetar" 
+                        />
+                    </Button>
+                    <Button 
+                        type="submit" 
+                        customClass="w-full" 
+                        id="sort" 
+                        handleClick={() => sort()}
+                        status={sorting}    
+                    >
                         Ordenar
                     </Button>
-                    <div className="flex justify-between pt-4">
-                        <Button
-                            handleClick={() => {reset()}}
-                            status={sorting}
-                        >
-                            Resetar
-                        </Button>
-                        <Button 
-                            handleClick={() => {stop()}}
-                        >
-                            Parar
-                        </Button>
-                    </div> 
                 </div>
             </form>
         </div>
