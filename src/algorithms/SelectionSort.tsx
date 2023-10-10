@@ -11,54 +11,83 @@ const SelectionSort = () => {
         sorting, 
         // setSorting 
     } = useAlgorithmContext();
-    let sortedNumbers = [...numbers];
-    // let numberJ = document.getElementById(`${sortedNumbers[j]}`);
-    // if (numberJ) numberJ.style.border="solid 3px red"                        
-    
-    const solve = () => {
-        for (let i = 0; i < sortedNumbers.length - 1; i++) {
-            setTimeout(()=>{
-                let numberI = document.getElementById(`${sortedNumbers[i]}`);
-                if (numberI) numberI.style.border="solid 3px red" 
-                let l = i;
-                for (let j = i + 1; j < sortedNumbers.length; j++) {
-                    setTimeout(()=>{
-                        let numberJ = document.getElementById(`${sortedNumbers[j]}`);
-                        if (numberJ) numberJ.style.border="solid 3px red" 
-                    }, speed*j*0.25)
-                    setTimeout(()=>{
-                        let numberJ = document.getElementById(`${sortedNumbers[j]}`);
-                        if (numberJ) numberJ.style.border="none" 
-                    }, speed*j*0.3)
-                    if (sortedNumbers[j] < sortedNumbers[l]) {
-                        l = j;
-                    }
-                }
-                if (l !== i) {
-                    let newArray = [...sortedNumbers];
-                    let temp = newArray[i];
-                    newArray[i] = newArray[l];
-                    newArray[l] = temp;
-                    sortedNumbers = newArray
-                }
-                
-                setTimeout(()=>{
-                    setNumbers(numbers => sortedNumbers)
-                    setSteps(steps => steps+1)
-                }, speed*(i+1)*0.2)
-                
-                setTimeout(()=>{
-                    numberI = document.getElementById(`${sortedNumbers[i]}`);
-                    let numberL = document.getElementById(`${sortedNumbers[l]}`);
-                    if (numberI) numberI.style.border="none" 
-                    if (numberI) numberI.style.border="solid 3px green" 
-                    
-                }, speed*(i+1)*1.2)
-                
-            }, speed*(i+1)*4)
-        }
+    let sortedNumbers = [...numbers];                 
+
+    function sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    const swap = async (i: number, l: number, sortedNumbers: number[]) => {
+        let numberI = document.getElementById(`${sortedNumbers[i]}`);
+        let numberL = document.getElementById(`${sortedNumbers[l]}`);
+
+        if (numberI) numberI.style.border = "solid 3px red"
+        if (numberI) numberI.style.transform='translateY(-150%)'
+        if (numberL) numberL.style.transform='translateY(-150%)'
+        await sleep(speed*0.25);
+        // let distance = i-l
+        if (numberL) numberL.style.transform=`translateY(-150%)`
+        if (numberI) numberI.style.transform=`translateY(-150%)`
+        
+        // if (numberI) numberI.style.transform=`translate(calc((100% + 8px)*(${distance/2})), -150%)`
+        // if (numberL) numberL.style.transform=`translate(calc((-100% - 8px)*(${distance/2})), -150%)`
+        await sleep(speed*0.25);
+        setNumbers(sortedNumbers)
+        setSteps(steps => steps + 1)
+        // if (numberL) numberL.style.transform=`translate(0%, -150%)`
+        // if (numberI) numberI.style.transform=`translate(0%, -150%)`
+        // await sleep(500)
+        // if (numberL) numberL.style.transform=`translate(0%, -150%)`
+        // if (numberI) numberI.style.transform=`translate(0%, -150%)`
+        
+        await sleep(speed*0.25);
+        if (numberL) numberL.style.transform=`translate(0%, 0%)`
+        if (numberI) numberI.style.transform=`translate(0%, 0%)`
+     
+         
+        
+
+    }
+
+    const resolve = async (i: number, sortedNumbers: number[]) => {
+        let numberI = document.getElementById(`${sortedNumbers[i]}`);
+        if (numberI) numberI.style.border = "solid 3px red"
+        let l = i
+        await sleep(speed * 0.4);
+        for (let j = i + 1; j < sortedNumbers.length; j++) {
+            if (sortedNumbers[j] < sortedNumbers[l]) l = j
+ 
+            let numberJ = document.getElementById(`${sortedNumbers[j]}`);
+            if (numberJ) numberJ.style.border = "solid 3px red"
+            await sleep(speed * 0.27);
+            if (numberJ) numberJ.style.border = "solid 1px #6b7280"
+        }
+        if (l !== i) {
+            let newArray = [...sortedNumbers];
+            let temp = newArray[i];
+            newArray[i] = newArray[l];
+            newArray[l] = temp;
+            sortedNumbers = newArray
+            await swap(i, l, sortedNumbers);
+        }
+        return { sortedNumbers, l }
+    }
+
+    const solve = async () => {
+        for (let i = 0, timer = sortedNumbers.length; i < sortedNumbers.length - 1; timer--, i++) {
+            let resolved = (await resolve(i, sortedNumbers))
+            sortedNumbers = resolved.sortedNumbers
+            await sleep(timer);
+            
+            
+            let numberL = document.getElementById(`${sortedNumbers[resolved.l]}`);
+            if (numberL) numberL.style.border = "solid 1px #6b7280"
+            let numberI = document.getElementById(`${sortedNumbers[i]}`);
+            if (numberI) numberI.style.border = "solid 3px green"
+      
+            
+        }
+    }
     useEffect(() => {
         let smallerDiv = document.getElementById('smaller-div')
         if(actualAlgorithm.value === 'selection'){

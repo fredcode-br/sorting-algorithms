@@ -41,9 +41,9 @@ AlgorithmContext.displayName = "Algorítmo";
 
 export const AlgorithmProvider = ({ children }: Props) => {
     const algorithms: IAlgorithmContext[] = [
+        {name: 'Insertion Sort', value: 'insertion'},
         {name: 'Bubble Sort', value: 'bubble'},
         {name: 'Selection Sort', value: 'selection'},
-        {name: 'Insertion Sort', value: 'insertion'},
         {name: 'Quick Sort', value: 'quick'}
     ];
     const [ actualAlgorithm, setActualAlgorithm ] = useState<IAlgorithmContext>(algorithms[0]);
