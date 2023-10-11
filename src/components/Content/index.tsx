@@ -7,7 +7,7 @@ import Label from "../Label";
 // import QuickSort from "../../algorithms/QuickSort";
 
 const Content = () => {
-    const { numbers, steps, actualAlgorithm, smallest } = useAlgorithmContext();
+    const { numbers, steps, smallest } = useAlgorithmContext();
 
     return (
         <div className="flex flex-col justify-center items-center relative gap-2 bg-dark-100 text-white" style={{ gridArea: 'CT', height: '88vh'}}>

@@ -6,7 +6,14 @@ import Content from "../Content"
 
 const Layout = () => {
     return (
-        <div className={styles.grid}>
+        <div 
+            className="grid"
+            style={{ 
+                gridTemplateColumns: '300px auto',
+                gridTemplateAreas: `'AS MH'
+                                    'AS CT'`
+            }}
+        >
             <MainHeader />
             <Aside />
             <Content />

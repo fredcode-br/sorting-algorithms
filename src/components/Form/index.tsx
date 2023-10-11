@@ -6,7 +6,7 @@ import Label from "../Label";
 
 const Form = () => {
 
-    const { algorithms, selectAlgorithmn, sort, reset, setSpeed, sorting} = useAlgorithmContext();
+    const { algorithms, selectAlgorithmn, sort, reset, setSpeed, speed, sorting, range, setRange} = useAlgorithmContext();
     
     return (
         <div className="w-full">
@@ -31,6 +31,27 @@ const Form = () => {
                 <div className="flex w-full">
                     <Label
                         customClass="bg-transparent border-none rounded px-0 py-0 me-2"
+                        htmlFor="range"
+                        status={sorting}
+                    >
+                        Range: 
+                    </Label>
+                    <input 
+                        disabled={sorting}
+                        className="w-full"
+                        type="range" 
+                        name="range" 
+                        id="range"
+                        step="1"
+                        min="5"
+                        max="10"
+                        value={range}
+                        onChange={event => setRange(Number(event.target.value))}
+                    />
+                </div>
+                <div className="flex w-full">
+                    <Label
+                        customClass="bg-transparent border-none rounded px-0 py-0 me-2"
                         htmlFor="speed"
                         status={sorting}
                     >
@@ -45,9 +66,9 @@ const Form = () => {
                         step="1000"
                         min="1000"
                         max="5000"
+                        value={speed}
                         onChange={event => setSpeed(Number(event.target.value))}
                     />
-            
                 </div>
                 <div className="flex gap-2 w-full">
                     <Button

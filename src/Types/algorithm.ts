@@ -17,4 +17,6 @@ export type AlgorithmContextType = {
     setSpeed: React.Dispatch<React.SetStateAction<number>>;
     smallest: number;
     setSmallest: React.Dispatch<React.SetStateAction<number>>;
+    range: number;
+    setRange: React.Dispatch<React.SetStateAction<number>>;
 };

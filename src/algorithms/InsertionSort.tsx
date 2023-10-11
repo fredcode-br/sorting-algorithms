@@ -17,6 +17,32 @@ const InsertionSort = () => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    async function swap(j: number) {
+        let J = document.getElementById(`${sortedNumbers[j]}`)
+        let J1 = document.getElementById(`${sortedNumbers[j-1]}`)
+        
+        if (J && J1) {
+            J.style.transform=`translate(calc((100% + 8px)), -150%)`
+            J1.style.transform=`translate(calc((-100% - 8px)), -150%)`
+            await sleep(speed * 0.05)
+
+            J.style.transitionDuration='0ms'
+            J1.style.transitionDuration='0ms'
+            await sleep(speed * 0.2)
+            
+            setNumbers(sortedNumbers)
+            setSteps(steps => steps + 1)
+        
+            J.style.transform=`translate(0%, -150%)`
+            J1.style.transform=`translate(0%, -150%)`
+            await sleep(speed * 0.05)
+   
+            J.style.transitionDuration='200ms'
+            J1.style.transitionDuration='200ms'
+        }
+
+    }
+
     const solve = async () => {
         const n = sortedNumbers.length
         for (let i = 1; i < n; i++) {
@@ -33,7 +59,6 @@ const InsertionSort = () => {
         
             for (let j = i; j > 0; j--) {
               if (sortedNumbers[j] < sortedNumbers[j - 1]) {
-                // Troca os elementos se o elemento atual for menor que o anterior
                 const temp = sortedNumbers[j];
                 let newArray = [...sortedNumbers];
                 newArray[j] = newArray[j - 1];
@@ -43,11 +68,11 @@ const InsertionSort = () => {
                 let numberJ = document.getElementById(`${sortedNumbers[j]}`);
                 let numberJ1 = document.getElementById(`${sortedNumbers[j - 1]}`);
                 if (numberJ) numberJ.style.transform = 'translate(0%, -150%)'
-                    if (numberJ1) numberJ1.style.transform = 'translate(0%, -150%)'
+                if (numberJ1) numberJ1.style.transform = 'translate(0%, -150%)'
                     await sleep(speed * 0.2)
 
-                    setNumbers(sortedNumbers)
-                    setSteps(steps => steps + 1)
+                    await swap(j)
+                    
                     await sleep(speed * 0.2)
 
                     if (numberJ) numberJ.style.transform = 'translateY(0%)'

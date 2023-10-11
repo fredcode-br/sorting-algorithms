@@ -22,8 +22,6 @@ const BubbleSort = () => {
         let J1 = document.getElementById(`${sortedNumbers[j-1]}`)
         
         if (J && J1) {
-            let numberJ = J.innerHTML
-            let numberJ1 = J1.innerHTML
             J.style.transform=`translate(calc((100% + 8px)), -150%)`
             J1.style.transform=`translate(calc((-100% - 8px)), -150%)`
             await sleep(speed * 0.05)
@@ -85,8 +83,8 @@ const BubbleSort = () => {
                 await sleep(speed * 0.03)
             }
             if (i === 1) {
-                for (i = 0; i < sortedNumbers.length; i++) {
-                    let number = document.getElementById(`${sortedNumbers[i]}`)
+                for (let ind = 0; ind < sortedNumbers.length; ind++) {
+                    let number = document.getElementById(`${sortedNumbers[ind]}`)
                     if (number) number.style.border = "solid 3px green"
                 }
             }
