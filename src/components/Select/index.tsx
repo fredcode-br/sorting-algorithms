@@ -1,6 +1,6 @@
 import Iselect from "../../Types/select"
 
-const Select = ({options, id, handleSelect} : Iselect) => {
+const Select = ({options, id, handleSelect, status, customClass} : Iselect) => {
  
     function select(event: React.ChangeEvent<HTMLSelectElement>) {
         event.preventDefault()
@@ -12,8 +12,8 @@ const Select = ({options, id, handleSelect} : Iselect) => {
         
         <select 
             onChange={select}
-      
-            className="w-full bg-dark-300 dark:bg-fredcode-100  text-white border border-gray-100 hover:bg-dark-200 hover:dark:bg-fredcode-200 px-3 py-2 rounded-r"
+            disabled={status}
+            className={"w-full bg-dark-300 dark:bg-fredcode-100  text-white border border-gray-100 hover:bg-dark-200 disabled:bg-dark-200 disabled:opacity-25 px-3 py-2 rounded-r "+customClass}
             id={id}
         >   
             {options.map((option, index) => (

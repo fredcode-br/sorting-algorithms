@@ -2,49 +2,52 @@ import Button from "../Button";
 import Select from "../Select";
 import IconReset from "./reset.svg"
 import { useAlgorithmContext } from "../../common/context/Algorithm";
+import Label from "../Label";
 
 const Form = () => {
 
-    const { algorithms, selectAlgorithmn, sort, reset, stop, speed, setSpeed, sorting} = useAlgorithmContext();
+    const { algorithms, selectAlgorithmn, sort, reset, setSpeed, sorting} = useAlgorithmContext();
     
     return (
         <div className="w-full">
             <h2 className="pb-10 font-bold text-3xl">Algorithms</h2>
             <form className="flex flex-col items-center gap-12">
                 <div className="flex w-full">
-                <label 
-                    className="bg-dark-100 text-white border border-gray-100 rounded-l px-3 py-2"
-                    htmlFor="algorithm">
-                    Algorítmo
-                </label>
-                <Select 
-                    id="algorithm" 
-                    options={algorithms}
-                    handleSelect={(value = "") => selectAlgorithmn(value)}
-                />
+                    <Label 
+                        customClass="w-2/5"
+                        htmlFor="algorithm"
+                        status={sorting}
+                    >
+                        Algorithm
+                    </Label>
+                    <Select 
+                        customClass="w-3/5"
+                        status={sorting}
+                        id="algorithm" 
+                        options={algorithms}
+                        handleSelect={(value = "") => selectAlgorithmn(value)}
+                    />
                 </div>
-                <div className="w-full">
+                <div className="flex w-full">
+                    <Label
+                        customClass="bg-transparent border-none rounded px-0 py-0 me-2"
+                        htmlFor="speed"
+                        status={sorting}
+                    >
+                        Speed: 
+                    </Label>
                     <input 
-                            disabled={sorting}
-                            className="w-full"
-                            type="range" 
-                            name="speed" 
-                            id="speed"
-                            step="1000"
-                            min="1000"
-                            max="5000"
-                            onChange={event => setSpeed(Number(event.target.value))}
-                            />
-                    <div className="flex w-full pt-3">
-                        <label 
-                            className="bg-dark-100  text-white border border-gray-100 rounded-l px-3 py-2"
-                            htmlFor="speed">
-                            Velocidade
-                        </label>
-                        <p className="w-full bg-dark-300 text-white border border-gray-100 px-3 py-2 rounded-r">
-                            {(Number(speed))*0.001}
-                        </p>
-                    </div>
+                        disabled={sorting}
+                        className="w-full"
+                        type="range" 
+                        name="speed" 
+                        id="speed"
+                        step="1000"
+                        min="1000"
+                        max="5000"
+                        onChange={event => setSpeed(Number(event.target.value))}
+                    />
+            
                 </div>
                 <div className="flex gap-2 w-full">
                     <Button
@@ -64,7 +67,7 @@ const Form = () => {
                         handleClick={() => sort()}
                         status={sorting}    
                     >
-                        Ordenar
+                        Sort
                     </Button>
                 </div>
             </form>

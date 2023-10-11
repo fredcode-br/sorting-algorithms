@@ -15,4 +15,6 @@ export type AlgorithmContextType = {
     setSteps: React.Dispatch<React.SetStateAction<number>>;
     speed: number;
     setSpeed: React.Dispatch<React.SetStateAction<number>>;
+    smallest: number;
+    setSmallest: React.Dispatch<React.SetStateAction<number>>;
 };

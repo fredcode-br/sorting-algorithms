@@ -22,7 +22,9 @@ const DEFAUL_VALUE = {
     steps: 0,
     setSteps: () => {},
     speed: 1000,
-    setSpeed: () => {}
+    setSpeed: () => {},
+    smallest: 0,
+    setSmallest: () => {}
 };
 
 function generateRandomNumbers(): number[] {
@@ -41,16 +43,17 @@ AlgorithmContext.displayName = "Algorítmo";
 
 export const AlgorithmProvider = ({ children }: Props) => {
     const algorithms: IAlgorithmContext[] = [
-        {name: 'Insertion Sort', value: 'insertion'},
         {name: 'Bubble Sort', value: 'bubble'},
+        {name: 'Insertion Sort', value: 'insertion'},
         {name: 'Selection Sort', value: 'selection'},
-        {name: 'Quick Sort', value: 'quick'}
+        // {name: 'Quick Sort', value: 'quick'},
     ];
     const [ actualAlgorithm, setActualAlgorithm ] = useState<IAlgorithmContext>(algorithms[0]);
     const [ numbers, setNumbers ] = useState<number[]>(generateRandomNumbers);
     const [ sorting, setSorting ] = useState<boolean>(false);
     const [ steps, setSteps ] = useState<number>(0);
-    const [ speed, setSpeed ] = useState<number>(1000)
+    const [ speed, setSpeed ] = useState<number>(1000);
+    const [ smallest, setSmallest  ] = useState<number>(0)
     
     return (
         <AlgorithmContext.Provider value={{ 
@@ -64,7 +67,9 @@ export const AlgorithmProvider = ({ children }: Props) => {
             steps,
             setSteps,
             speed,
-            setSpeed
+            setSpeed,
+            smallest,
+            setSmallest
         }}>
             { children }
         </AlgorithmContext.Provider>
@@ -83,7 +88,9 @@ export const useAlgorithmContext = () => {
         steps,
         setSteps,
         speed,
-        setSpeed
+        setSpeed,
+        smallest,
+        setSmallest
     } = useContext(AlgorithmContext);
     
     function selectAlgorithmn(value: string) {
@@ -99,10 +106,6 @@ export const useAlgorithmContext = () => {
         setSorting(false)
         setNumbers(generateRandomNumbers)
         setSteps(0)
-    }
-
-    function stop() {
-        setSorting(false)
     }
 
     useEffect(() => {
@@ -122,10 +125,11 @@ export const useAlgorithmContext = () => {
         steps,
         setSteps,
         reset,
-        stop,
         speed, 
         setSpeed,
         sorting,
-        setSorting
+        setSorting,
+        smallest,
+        setSmallest
     }
 }
