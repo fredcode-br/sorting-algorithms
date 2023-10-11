@@ -2,8 +2,7 @@ import Footer from "../Footer";
 import { useAlgorithmContext } from "../../common/context/Algorithm";
 import BubbleSort from "../../algorithms/BubbleSort";
 import InsertionSort from "../../algorithms/InsertionSort";
-import SelectionSort from "../../algorithms/SelectionSort";
-import Label from "../Form/Label";
+import SelectionSort from "../../algorithms/SelectionSort"; 
 // import QuickSort from "../../algorithms/QuickSort";
 
 const Content = () => {
