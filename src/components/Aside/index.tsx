@@ -4,11 +4,10 @@ import logo from './logo.svg'
 const Aside = () => {
     return (
         <div 
-            className="px-6 py-8 text-center flex flex-col items-center justify-between bg-dark-200 text-white" 
-            style={{ gridArea: 'AS'}}
+            className="grid-in-aside px-6 py-8 text-center flex flex-col items-center justify-between bg-dark-200 text-white h-full" 
         >
             <Form />
-            <div>
+            <div className='hidden md:block'>
                 <img src={logo} alt="" />
             </div>
         </div>

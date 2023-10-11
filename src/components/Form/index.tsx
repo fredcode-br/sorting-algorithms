@@ -1,17 +1,17 @@
-import Button from "../Button";
-import Select from "../Select";
+import Button from "./Button";
+import Select from "./Select";
 import IconReset from "./reset.svg"
 import { useAlgorithmContext } from "../../common/context/Algorithm";
-import Label from "../Label";
+import Label from "./Label";
+
 
 const Form = () => {
-
     const { algorithms, selectAlgorithmn, sort, reset, setSpeed, speed, sorting, range, setRange} = useAlgorithmContext();
-    
+
     return (
         <div className="w-full">
             <h2 className="pb-10 font-bold text-3xl">Algorithms</h2>
-            <form className="flex flex-col items-center gap-12">
+            <form className="flex flex-col items-center gap-2 md:gap-7">
                 <div className="flex w-full">
                     <Label 
                         customClass="w-2/5"
@@ -23,7 +23,7 @@ const Form = () => {
                     <Select 
                         customClass="w-3/5"
                         status={sorting}
-                        id="algorithm" 
+                        name="algorithm" 
                         options={algorithms}
                         handleSelect={(value = "") => selectAlgorithmn(value)}
                     />

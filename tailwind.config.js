@@ -16,15 +16,29 @@ module.exports = {
         ligth: {
           100: '#F6F6F9',
           200: '#d5c5fc'
-        },
-        fredcode: {
-          100: '#986DFF',
-          200: '#6934E8',
-          300: '#420ac9',
         }
-      }
+      },
+      gridTemplateColumns: {
+        default: '300px auto',
+      },
+      gridTemplateRows: {
+        'default': '12vh 88vh',
+        'phone': '40vh 60vh',
+      },
+      gridTemplateAreas: {
+        'default': [
+          'aside header',
+          'aside content',
+        ],
+        'phone': [
+          'aside',
+          'content',
+        ],
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@savvywombat/tailwindcss-grid-areas')
+  ],
 }
 

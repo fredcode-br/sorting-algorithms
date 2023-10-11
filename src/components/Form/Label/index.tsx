@@ -1,4 +1,4 @@
-import Ilabel from "../../Types/label";
+import Ilabel from "../../../Types/label";
 
 const Label = ({children, customClass, htmlFor, status}  : Ilabel ) => {
     let disabled = ""

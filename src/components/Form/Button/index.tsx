@@ -1,4 +1,4 @@
-import Ibutton from "../../Types/button";
+import Ibutton from "../../../Types/button";
 
 const Button = ({children, type, customClass, status, handleClick}  : Ibutton ) => {
     function clicked(event: React.MouseEvent<HTMLButtonElement>) {
